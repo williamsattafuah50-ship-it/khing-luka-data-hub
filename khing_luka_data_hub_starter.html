@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102a72">
+<title>KHING LUKA DATA HUB</title>
+<style>
+:root{--navy:#102a72;--blue:#2563eb;--ink:#14213d;--muted:#667085;--bg:#f3f6fc;--line:#e3e9f4}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#0b1f59,#2563eb);color:white;padding:25px 18px 30px}
+.wrap{max-width:980px;margin:auto}.brand{font-size:13px;letter-spacing:2px;font-weight:700;opacity:.9}.hero{font-size:30px;font-weight:800;margin:8px 0}.tag{opacity:.9;font-size:13px}
+nav{display:flex;gap:9px;margin-top:22px;flex-wrap:wrap}nav button{border:1px solid #ffffff66;background:#ffffff18;color:white;padding:10px 15px;border-radius:10px;font-weight:700;cursor:pointer}nav button.active{background:white;color:var(--navy)}
+main{max-width:980px;margin:22px auto;padding:0 15px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 7px 25px #152b5710;margin-bottom:16px}
+h2{font-size:20px;margin:0 0 7px}.sub{color:var(--muted);font-size:13px;line-height:1.5;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label{display:block;font-size:13px;font-weight:700;margin:0 0 7px}.field input,.field select{width:100%;padding:13px;border:1px solid #cfd8e8;border-radius:10px;background:white;font-size:15px;color:var(--ink)}
+button.primary{background:var(--blue);color:white;border:0;border-radius:11px;padding:14px 18px;font-weight:700;font-size:15px;width:100%;margin-top:16px;cursor:pointer}
+.notice{padding:12px 14px;border-radius:10px;background:#fff7e6;border:1px solid #f3d28b;color:#805600;font-size:13px;line-height:1.5;margin-top:15px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.pill{padding:8px 11px;border-radius:999px;background:#edf3ff;color:#1645a5;font-size:12px;font-weight:700}
+.hidden{display:none}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f5f8ff;padding:14px;border-radius:12px}.stat strong{font-size:22px;display:block}.stat span{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line)}th{color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.hero{font-size:25px}.card{padding:16px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="brand">KHING LUKA</div><div class="hero">DATA HUB</div>
+ <div class="tag">FAST • EASY • RELIABLE</div>
+ <nav><button id="buyTab" class="active" onclick="show('buy')">Buy Data</button><button id="adminTab" onclick="show('admin')">Admin Preview</button></nav>
+</div></header>
+<main>
+<section id="buy">
+ <div class="card">
+  <h2>Buy your data bundle</h2><p class="sub">Choose a network and package, then enter the number that should receive the data.</p>
+  <div class="pills"><span class="pill">MTN</span><span class="pill">Telecel</span><span class="pill">AT</span></div>
+  <div class="grid">
+   <div class="field"><label for="network">Network</label><select id="network"><option>MTN</option><option>Telecel</option><option>AT</option></select></div>
+   <div class="field"><label for="bundle">Data package</label><select id="bundle"><option value="">Select a package after supplier setup</option></select></div>
+   <div class="field"><label for="recipient">Recipient phone number</label><input id="recipient" inputmode="tel" maxlength="10" placeholder="e.g. 0240000000"></div>
+   <div class="field"><label for="email">Email (optional)</label><input id="email" type="email" placeholder="you@example.com"></div>
+  </div>
+  <button class="primary" onclick="placeDemo()">Continue to payment (not active yet)</button>
+  <div class="notice"><strong>Preview mode:</strong> This is a website design starter. No payment is collected and no data is sent. Live bundles, checkout and automatic delivery will be enabled only after a verified supplier API and approved payment account are connected.</div>
+ </div>
+</section>
+<section id="admin" class="hidden">
+ <div class="card">
+  <h2>Admin dashboard preview</h2><p class="sub">This is a visual preview only. It is not protected by a real admin login and must not be used to manage real customer payments yet.</p>
+  <div class="stats"><div class="stat"><strong>0</strong><span>Total orders</span></div><div class="stat"><strong>0</strong><span>Successful orders</span></div><div class="stat"><strong>GH₵0.00</strong><span>Sales today</span></div></div>
+ </div>
+ <div class="card"><h2>Recent orders</h2><p class="sub">Real customer orders will appear here after the secure database and backend are connected.</p>
+ <table><thead><tr><th>Reference</th><th>Network</th><th>Status</th></tr></thead><tbody><tr><td colspan="3">No live orders — demo preview</td></tr></tbody></table></div>
+</section>
+</main>
+<footer>© KHING LUKA DATA HUB · Website prototype</footer>
+<script>
+function show(which){
+ document.getElementById('buy').classList.toggle('hidden',which!=='buy');
+ document.getElementById('admin').classList.toggle('hidden',which!=='admin');
+ document.getElementById('buyTab').classList.toggle('active',which==='buy');
+ document.getElementById('adminTab').classList.toggle('active',which==='admin');
+}
+function placeDemo(){
+ const n=document.getElementById('recipient').value.trim();
+ if(!/^0\d{9}$/.test(n)){alert('Enter a valid 10-digit Ghana phone number.');return;}
+ alert('This is only a design preview. Payment and data delivery are not connected yet. No order has been placed.');
+}
+</script>
+</body></html>
